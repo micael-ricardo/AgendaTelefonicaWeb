@@ -7,10 +7,14 @@ builder.Services.AddDbContext<AgendaTelefonicaWebContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("AgendaTelefonicaWebContext") ?? throw new InvalidOperationException("Connection string 'AgendaTelefonicaWebContext' not found."),
     MySqlServerVersion.AutoDetect(builder.Configuration.GetConnectionString("AgendaTelefonicaWebContext"))));
 
+
+
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

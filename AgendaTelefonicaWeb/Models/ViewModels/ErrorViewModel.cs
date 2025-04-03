@@ -1,4 +1,4 @@
-namespace AgendaTelefonicaWeb.Models
+namespace AgendaTelefonicaWeb.Models.ViewModels
 {
     public class ErrorViewModel
     {

@@ -34,7 +34,7 @@ namespace AgendaTelefonicaWeb.Controllers
             }
 
             var contato = await _context.Contato
-                .FirstOrDefaultAsync(m => m.ContatoId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (contato == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace AgendaTelefonicaWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ContatoId,Nome,Idade")] Contato contato)
         {
-            if (id != contato.ContatoId)
+            if (id != contato.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace AgendaTelefonicaWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContatoExists(contato.ContatoId))
+                    if (!ContatoExists(contato.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace AgendaTelefonicaWeb.Controllers
             }
 
             var contato = await _context.Contato
-                .FirstOrDefaultAsync(m => m.ContatoId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (contato == null)
             {
                 return NotFound();
@@ -151,7 +151,7 @@ namespace AgendaTelefonicaWeb.Controllers
 
         private bool ContatoExists(int id)
         {
-            return _context.Contato.Any(e => e.ContatoId == id);
+            return _context.Contato.Any(e => e.Id == id);
         }
     }
 }

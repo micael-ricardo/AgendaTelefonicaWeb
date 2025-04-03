@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using AgendaTelefonicaWeb.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<AgendaTelefonicaWebContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AgendaTelefonicaWebContext") ?? throw new InvalidOperationException("Connection string 'AgendaTelefonicaWebContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

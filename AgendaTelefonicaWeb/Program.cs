@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using AgendaTelefonicaWeb.Data;
+using AgendaTelefonicaWeb.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AgendaTelefonicaWebContext>(options =>
@@ -12,6 +13,9 @@ builder.Services.AddDbContext<AgendaTelefonicaWebContext>(options =>
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<TelefoneService>();
+builder.Services.AddScoped<ContatoService>();
+
 
 var app = builder.Build();
 

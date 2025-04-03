@@ -1,157 +1,195 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AgendaTelefonicaWeb.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using AgendaTelefonicaWeb.Services;
 using AgendaTelefonicaWeb.Models;
+using AgendaTelefonicaWeb.Models.ViewModels;
 
 namespace AgendaTelefonicaWeb.Controllers
 {
     public class ContatoesController : Controller
     {
-        private readonly AgendaTelefonicaWebContext _context;
+        private readonly ContatoService _ContatoService;
+        private readonly TelefoneService _TelefoneService;
 
-        public ContatoesController(AgendaTelefonicaWebContext context)
+        public ContatoesController(ContatoService contatoService , TelefoneService telefoneService)
         {
-            _context = context;
+            _ContatoService = contatoService;
+            _TelefoneService = telefoneService;
         }
 
-        // GET: Contatoes
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Contato.ToListAsync());
+            var list = _ContatoService.FindAll();
+
+            return View(list);  
         }
 
-        // GET: Contatoes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var contato = await _context.Contato
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (contato == null)
-            {
-                return NotFound();
-            }
-
-            return View(contato);
-        }
-
-        // GET: Contatoes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Contatoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ContatoId,Nome,Idade")] Contato contato)
+        public IActionResult Create(Contato contato)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(contato);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(contato);
-        }
-
-        // GET: Contatoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var contato = await _context.Contato.FindAsync(id);
-            if (contato == null)
-            {
-                return NotFound();
-            }
-            return View(contato);
-        }
-
-        // POST: Contatoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ContatoId,Nome,Idade")] Contato contato)
-        {
-            if (id != contato.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(contato);
-                    await _context.SaveChangesAsync();
+                    _ContatoService.Insert(contato);
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
-                    if (!ContatoExists(contato.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError(string.Empty, "Erro ao salvar: " + ex.Message);
+                    return View(contato);
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(contato);
         }
 
-        // GET: Contatoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var contato = await _context.Contato
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (contato == null)
-            {
-                return NotFound();
-            }
 
-            return View(contato);
-        }
+        /*  private readonly AgendaTelefonicaWebContext _context;
 
-        // POST: Contatoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var contato = await _context.Contato.FindAsync(id);
-            if (contato != null)
-            {
-                _context.Contato.Remove(contato);
-            }
+          public ContatoServiceContatoService(AgendaTelefonicaWebContext context)
+          {
+              _context = context;
+          }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+          // GET: Contatoes
+          public async Task<IActionResult> Index()
+          {
+              return View(await _context.Contato.ToListAsync());
+          }
 
-        private bool ContatoExists(int id)
-        {
-            return _context.Contato.Any(e => e.Id == id);
-        }
+          // GET: Contatoes/Details/5
+        /*  public async Task<IActionResult> Details(int? id)
+          {
+              if (id == null)
+              {
+                  return NotFound();
+              }
+
+              var contato = await _context.Contato
+                  .FirstOrDefaultAsync(m => m.Id == id);
+              if (contato == null)
+              {
+                  return NotFound();
+              }
+
+              return View(contato);
+          }
+
+          // GET: Contatoes/Create
+          public IActionResult Create()
+          {
+              return View();
+          }
+
+          // POST: Contatoes/Create
+          // To protect from overposting attacks, enable the specific properties you want to bind to.
+          // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+          [HttpPost]
+          [ValidateAntiForgeryToken]
+          public async Task<IActionResult> Create([Bind("ContatoId,Nome,Idade")] Contato contato)
+          {
+              if (ModelState.IsValid)
+              {
+                  _context.Add(contato);
+                  await _context.SaveChangesAsync();
+                  return RedirectToAction(nameof(Index));
+              }
+              return View(contato);
+          }
+
+          // GET: Contatoes/Edit/5
+          public async Task<IActionResult> Edit(int? id)
+          {
+              if (id == null)
+              {
+                  return NotFound();
+              }
+
+              var contato = await _context.Contato.FindAsync(id);
+              if (contato == null)
+              {
+                  return NotFound();
+              }
+              return View(contato);
+          }
+
+          // POST: Contatoes/Edit/5
+          // To protect from overposting attacks, enable the specific properties you want to bind to.
+          // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+          [HttpPost]
+          [ValidateAntiForgeryToken]
+          public async Task<IActionResult> Edit(int id, [Bind("ContatoId,Nome,Idade, TelefoneId")] Contato contato)
+          {
+              if (id != contato.Id)
+              {
+                  return NotFound();
+              }
+
+              if (ModelState.IsValid)
+              {
+                  try
+                  {
+                      _context.Update(contato);
+                      await _context.SaveChangesAsync();
+                  }
+                  catch (DbUpdateConcurrencyException)
+                  {
+                      if (!ContatoExists(contato.Id))
+                      {
+                          return NotFound();
+                      }
+                      else
+                      {
+                          throw;
+                      }
+                  }
+                  return RedirectToAction(nameof(Index));
+              }
+              return View(contato);
+          }
+
+          // GET: Contatoes/Delete/5
+          public async Task<IActionResult> Delete(int? id)
+          {
+              if (id == null)
+              {
+                  return NotFound();
+              }
+
+              var contato = await _context.Contato
+                  .FirstOrDefaultAsync(m => m.Id == id);
+              if (contato == null)
+              {
+                  return NotFound();
+              }
+
+              return View(contato);
+          }
+
+          // POST: Contatoes/Delete/5
+          [HttpPost, ActionName("Delete")]
+          [ValidateAntiForgeryToken]
+          public async Task<IActionResult> DeleteConfirmed(int id)
+          {
+              var contato = await _context.Contato.FindAsync(id);
+              if (contato != null)
+              {
+                  _context.Contato.Remove(contato);
+              }
+
+              await _context.SaveChangesAsync();
+              return RedirectToAction(nameof(Index));
+          }
+
+          private bool ContatoExists(int id)
+          {
+              return _context.Contato.Any(e => e.Id == id);
+          }*/
     }
 }

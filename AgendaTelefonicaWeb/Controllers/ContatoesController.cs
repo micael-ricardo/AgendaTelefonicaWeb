@@ -79,22 +79,22 @@ namespace AgendaTelefonicaWeb.Controllers
             return View(contato);
         }
 
-      /*  public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var contato = await _ContatoService
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var contato = await _ContatoService.FindByIdAsync(id);
+
             if (contato == null)
             {
                 return NotFound();
             }
 
             return View(contato);
-        }*/
+        }
         /*
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

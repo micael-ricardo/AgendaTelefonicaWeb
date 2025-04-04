@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<h2>Digite 6 números separados por vírgula ou espaço</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <textarea name="numerosInput" rows="3" cols="50" placeholder="Ex: 5, 3, 8, 1, 2, 7" required></textarea>
+    </div>
+
+    <br />
+    <input type="submit" value="Ordenar" class="btn btn-primary" />
+}
+
+@if (ViewBag.NumerosOrdenados != null)
+{
+    <h3>Números em ordem crescente:</h3>
+    <div>
+        @foreach (var numero in (int[])ViewBag.NumerosOrdenados)
+        {
+            <span>@numero </span>
+        }
+    </div>
+}
+else if (ViewBag.Mensagem != null)
+{
+    <p style="color: red;">@ViewBag.Mensagem</p>
+}

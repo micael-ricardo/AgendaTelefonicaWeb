@@ -1,16 +1,16 @@
-﻿function aplicarMascaraTelefone() {
-    const telefoneInput = document.querySelectorAll('.telefone');
+﻿$(document).ready(function () {
 
-    if (telefoneInput) {
+    const telefoneInputs = document.querySelectorAll('.telefone');
+
+    telefoneInputs.forEach(function (input) {
         Inputmask({
             mask: ['(99) 9999-9999', '(99) 99999-9999'],
             keepStatic: true,
             removeMaskOnSubmit: true
-        }).mask(telefoneInput);
-    }
-}
+        }).mask(input);
+    });
+})
 
-document.addEventListener('DOMContentLoaded', aplicarMascaraTelefone);
 
 
 $(document).ready(function () {

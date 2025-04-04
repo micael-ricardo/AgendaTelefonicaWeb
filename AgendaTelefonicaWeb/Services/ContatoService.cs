@@ -75,11 +75,43 @@ namespace AgendaTelefonicaWeb.Services
 
 
 
-        public async Task RemoveAsync(int id) 
+       /* public async Task RemoveAsync(int id) 
         {
             var obj = await _context.Contato.FindAsync(id);
              _context.Contato.Remove(obj);
              await _context.SaveChangesAsync();    
+        }*/
+
+        public async Task RemoveAsync(int id)
+        {
+            var contato = await _context.Contato
+                .Include(c => c.Telefones) 
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (contato == null)
+                return;
+
+            var DiretorioDolog = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "logs");
+            var PastaLog = Path.Combine(DiretorioDolog, "log_exclusao.txt");
+
+            if (!Directory.Exists(DiretorioDolog))
+                Directory.CreateDirectory(DiretorioDolog);
+
+            var MensagemLog = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] Contato excluído: Nome = {contato.Nome}," +
+                $" Idade = {contato.Idade}";
+
+            if (contato.Telefones != null && contato.Telefones.Any())
+            {
+                var telefones = string.Join(", ", contato.Telefones.Select(t => t.Numero));
+                MensagemLog += $", Telefones = {telefones}";
+            }
+
+            MensagemLog += Environment.NewLine;
+
+            await File.AppendAllTextAsync(PastaLog, MensagemLog);
+
+            _context.Contato.Remove(contato);
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(Contato obj)

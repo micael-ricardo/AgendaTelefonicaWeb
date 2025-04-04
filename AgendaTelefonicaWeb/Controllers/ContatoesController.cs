@@ -95,25 +95,14 @@ namespace AgendaTelefonicaWeb.Controllers
 
             return View(contato);
         }
-        /*
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var contato = await _ContatoService.FindAsync(id);
-            if (contato != null)
-            {
-                _ContatoService.Remove(contato);
-            }
-
-            await _context.SaveChangesAsync();
+            await _ContatoService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
-        }*/
-
-        /*private async Task<bool> ContatoExists(int id)
-        {
-            return await _ContatoService.Any(e => e.Id == id);
-        }*/
+        }
 
     }
 }

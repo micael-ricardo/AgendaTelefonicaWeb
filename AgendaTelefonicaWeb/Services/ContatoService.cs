@@ -77,9 +77,9 @@ namespace AgendaTelefonicaWeb.Services
 
         public async Task RemoveAsync(int id) 
         {
-            var obj = _context.Contato.Find(id);
-            _context.Contato.Remove(obj);
-            _context.SaveChangesAsync();    
+            var obj = await _context.Contato.FindAsync(id);
+             _context.Contato.Remove(obj);
+             await _context.SaveChangesAsync();    
         }
 
         public async Task UpdateAsync(Contato obj)

@@ -9,7 +9,7 @@
 <p>
     <a type="button" asp-action="Create" class="btn btn-primary">Cadastrar Contato</a>  
 </p>
-<table class="table table-hover">
+<table id="tabelaContatos" class="table table-hover">
     <thead>
         <tr class="table-primary">
             <th>
@@ -40,6 +40,10 @@
                         {
                             <div>@telefone.Numero</div>
                         }
+                    }
+                    else
+                    {
+                        <span class="text-muted">Nenhum telefone</span>
                     }
                 </td>
 

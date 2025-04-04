@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaTelefonicaWeb.Migrations
 {
     [DbContext(typeof(AgendaTelefonicaWebContext))]
-    [Migration("20250403191306_CorrecaoForeignkey")]
-    partial class CorrecaoForeignkey
+    [Migration("20250403203426_AjusteFinal")]
+    partial class AjusteFinal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,23 +28,17 @@ namespace AgendaTelefonicaWeb.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Idade")
-                        .HasColumnType("int")
-                        .HasColumnName("Idade");
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("Nome");
-
-                    b.Property<int>("TelefoneId")
-                        .HasColumnType("int");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -55,19 +49,16 @@ namespace AgendaTelefonicaWeb.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ContatoId")
-                        .HasColumnType("int")
-                        .HasColumnName("IdContato");
+                        .HasColumnType("int");
 
                     b.Property<int>("Numero")
                         .HasMaxLength(16)
-                        .HasColumnType("int")
-                        .HasColumnName("Numero");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

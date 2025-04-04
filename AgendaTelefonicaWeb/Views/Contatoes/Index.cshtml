@@ -34,8 +34,15 @@
                 @Html.DisplayFor(modelItem => item.Idade)
             </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Telefones)
+                    @if (item.Telefones != null && item.Telefones.Any())
+                    {
+                        foreach (var telefone in item.Telefones)
+                        {
+                            <div>@telefone.Numero</div>
+                        }
+                    }
                 </td>
+
             <td>
                     <a asp-action="Edit" class="badge badge-warning" asp-route-id="@item.Id">Alterar</a> |
                     <a asp-action="Delete" class="badge badge-danger" asp-route-id="@item.Id">Excluir</a>

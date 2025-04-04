@@ -19,9 +19,10 @@ namespace AgendaTelefonicaWeb.Services
             return _context.Telefone.ToList();
         }
 
-        public void Insert(Telefone telefone)
+        public async Task InsertAsync(Telefone telefone)
         {
-            _context.Add(telefone);
+            await _context.AddAsync(telefone);
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -16,5 +16,6 @@ namespace AgendaTelefonicaWeb.Data
 
         public DbSet<Contato> Contato { get; set; } = default!;
         public DbSet<Telefone> Telefone { get; set; } = default!;
+        public object Telefones { get; internal set; }
     }
 }

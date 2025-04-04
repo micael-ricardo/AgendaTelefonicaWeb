@@ -25,23 +25,17 @@ namespace AgendaTelefonicaWeb.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Idade")
-                        .HasColumnType("int")
-                        .HasColumnName("Idade");
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("Nome");
-
-                    b.Property<int>("TelefoneId")
-                        .HasColumnType("int");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -52,19 +46,16 @@ namespace AgendaTelefonicaWeb.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ContatoId")
-                        .HasColumnType("int")
-                        .HasColumnName("IdContato");
+                        .HasColumnType("int");
 
                     b.Property<int>("Numero")
                         .HasMaxLength(16)
-                        .HasColumnType("int")
-                        .HasColumnName("Numero");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

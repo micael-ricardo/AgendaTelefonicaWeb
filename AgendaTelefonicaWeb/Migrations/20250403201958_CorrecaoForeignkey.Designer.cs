@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaTelefonicaWeb.Migrations
 {
     [DbContext(typeof(AgendaTelefonicaWebContext))]
-    [Migration("20250403121551_TelefoneForingkey")]
-    partial class TelefoneForingkey
+    [Migration("20250403201958_CorrecaoForeignkey")]
+    partial class CorrecaoForeignkey
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

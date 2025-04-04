@@ -2,6 +2,9 @@
 using AgendaTelefonicaWeb.Services;
 using AgendaTelefonicaWeb.Models;
 using AgendaTelefonicaWeb.Models.ViewModels;
+using System.Diagnostics;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace AgendaTelefonicaWeb.Controllers
 {
@@ -16,37 +19,69 @@ namespace AgendaTelefonicaWeb.Controllers
             _TelefoneService = telefoneService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _ContatoService.FindAll();
+            var list = await _ContatoService.FindAllAsync();
+
 
             return View(list);  
         }
 
-        public IActionResult Create()
+
+        public async Task<IActionResult> Create()
         {
-            return View();
+            return  View();
         }
+
+        /*[HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Contato contato)
+        {
+            Console.WriteLine($"Contato recebido: {JsonSerializer.Serialize(contato)}");
+           // Console.WriteLine($"Dados recebidos - Nome: {contato.Nome}, Idade: {contato.Idade}, Telefone: {contato}");
+            if (ModelState.IsValid)
+            {   
+                    await _ContatoService.InsertAsync(contato);
+                    return RedirectToAction(nameof(Index));
+            }
+   
+            return View(contato);
+        }*/
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Contato contato)
+        public async Task<IActionResult> Create(ContatoTelefoneViewModel viewModel, int Numero)
         {
-            if (ModelState.IsValid)
+            Console.WriteLine($"Dados recebidos: {JsonSerializer.Serialize(viewModel)}");
+
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    _ContatoService.Insert(contato);
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError(string.Empty, "Erro ao salvar: " + ex.Message);
-                    return View(contato);
-                }
+                return View(viewModel);
             }
-            return View(contato);
+
+            try
+            {
+                var contato = new Contato
+                {
+                    Nome = viewModel.Contato.Nome,
+                    Idade = viewModel.Contato.Idade
+                };
+                await _ContatoService.InsertAsync(contato, Numero);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(viewModel);
+            }
         }
+    
+
+
+
+
 
 
 

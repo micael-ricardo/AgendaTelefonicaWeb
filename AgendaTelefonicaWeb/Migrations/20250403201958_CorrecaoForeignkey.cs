@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AgendaTelefonicaWeb.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class CorrecaoForeignkey : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,15 +18,16 @@ namespace AgendaTelefonicaWeb.Migrations
                 name: "Contato",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(type: "longtext", nullable: false)
+                    Nome = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    IDADE = table.Column<int>(type: "int", nullable: false)
+                    Idade = table.Column<int>(type: "int", nullable: false),
+                    TelefoneId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contato", x => x.ID);
+                    table.PrimaryKey("PK_Contato", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -34,26 +35,27 @@ namespace AgendaTelefonicaWeb.Migrations
                 name: "Telefone",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    IDCONTATO = table.Column<int>(type: "int", nullable: false)
+                    IdContato = table.Column<int>(type: "int", nullable: false),
+                    Numero = table.Column<int>(type: "int", maxLength: 16, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Telefone", x => x.ID);
+                    table.PrimaryKey("PK_Telefone", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Telefone_Contato_IDCONTATO",
-                        column: x => x.IDCONTATO,
+                        name: "FK_Telefone_Contato_IdContato",
+                        column: x => x.IdContato,
                         principalTable: "Contato",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Telefone_IDCONTATO",
+                name: "IX_Telefone_IdContato",
                 table: "Telefone",
-                column: "IDCONTATO");
+                column: "IdContato");
         }
 
         /// <inheritdoc />

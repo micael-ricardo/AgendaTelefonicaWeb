@@ -25,13 +25,13 @@ namespace AgendaTelefonicaWeb.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Telefone telefone)
+        public async Task<IActionResult> Create(Telefone telefone)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _telefoneService.Insert(telefone);
+                    _telefoneService.InsertAsync(telefone);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)

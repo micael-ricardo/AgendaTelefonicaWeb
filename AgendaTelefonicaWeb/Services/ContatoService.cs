@@ -100,25 +100,67 @@ namespace AgendaTelefonicaWeb.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Contato obj)
+
+        public async Task UpdateAsync(Contato contato, List<string> numerosTelefone, List<int> telefonesIds = null)
         {
-            bool TemDados = await _context.Contato.AnyAsync(X =>  X.Id == obj.Id);
-            
-            if(!TemDados)
-            {
-                throw new DirectoryNotFoundException("Contato não encontrado");
-            }
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
             try
             {
-                _context.Contato.Update(obj);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+                var contatoExistente = await _context.Contato
+                    .Include(c => c.Telefones)
+                    .FirstOrDefaultAsync(c => c.Id == contato.Id);
+                if (contatoExistente == null)
+                {
+                    throw new KeyNotFoundException("Contato não encontrado");
+                }
 
+                _context.Entry(contatoExistente).CurrentValues.SetValues(contato);
+
+                if (numerosTelefone != null)
+                {
+                    await GerenciarTelefonesAsync(contatoExistente, numerosTelefone, telefonesIds ?? new List<int>());
+                }
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
+
+        private async Task GerenciarTelefonesAsync(Contato contato, List<string> numeros, List<int> telefonesIds)
+        {
+            var telefonesParaRemover = contato.Telefones
+                .Where(t => !telefonesIds.Contains(t.Id))
+                .ToList();
+
+            _context.Telefone.RemoveRange(telefonesParaRemover);
+
+            for (int i = 0; i < numeros.Count; i++)
+            {
+                if (i < telefonesIds.Count && telefonesIds[i] != 0)
+                {
+                    var telefoneExistente = contato.Telefones.FirstOrDefault(t => t.Id == telefonesIds[i]);
+                    if (telefoneExistente != null)
+                    {
+                        telefoneExistente.Numero = numeros[i];
+                    }
+                }
+                else
+                {
+                    contato.Telefones.Add(new Telefone
+                    {
+                        Numero = numeros[i],
+                        ContatoId = contato.Id
+                    });
+                }
+            }
+        }
+
     }
 }
 

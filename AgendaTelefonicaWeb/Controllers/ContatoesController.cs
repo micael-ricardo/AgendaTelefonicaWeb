@@ -55,9 +55,6 @@ namespace AgendaTelefonicaWeb.Controllers
             }
         }
 
-
-
-
         public async Task<IActionResult> Edit(int? id)
         {
             Console.WriteLine($"Entrouuu {id}");
@@ -82,6 +79,31 @@ namespace AgendaTelefonicaWeb.Controllers
 
             return View(viewModel);
 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ContatoTelefoneViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            try
+            {
+                await _ContatoService.UpdateAsync(
+                    viewModel.Contato,
+                    viewModel.Numeros,
+                    viewModel.TelefonesIds);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(viewModel);
+            }
         }
 
         public async Task<IActionResult> Delete(int? id)

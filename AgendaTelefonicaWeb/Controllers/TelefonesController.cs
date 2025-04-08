@@ -22,25 +22,5 @@ namespace AgendaTelefonicaWeb.Controllers
         {
             return View();  
         }
-        
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Telefone telefone)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _telefoneService.InsertAsync(telefone);
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError(string.Empty, "Erro ao salvar: " + ex.Message);
-                    return View(telefone); 
-                }
-            }
-            return View(telefone); 
-        }
     }
 }

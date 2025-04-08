@@ -1,11 +1,15 @@
 ﻿const ContatosModule = (function () {
-      let telefoneIndex = 1;
-     function reindexarTelefones() {
+    let telefoneIndex = 1;
+
+    function reindexarTelefones() {
         let index = 0;
         $('.telefone-group').each(function () {
-            $(this).find('input').attr('name', 'Telefones[' + index + ']')
-                .attr('id', 'Telefones_' + index + '_');
-            $(this).find('span').attr('asp-validation-for', 'Telefones[' + index + ']');
+            $(this).find('input')
+                .attr('name', 'Numeros[' + index + ']')
+                .attr('id', 'Numeros_' + index);
+
+            $(this).find('span')
+                .attr('data-valmsg-for', 'Numeros[' + index + ']'); 
             index++;
         });
         telefoneIndex = index;
@@ -40,11 +44,17 @@
 
     function adicionarTelefone() {
         const newGroup = $('.telefone-group:first').clone();
-        newGroup.find('input').val('')
-            .attr('asp-for', '')
-            .attr('name', 'Telefones[' + telefoneIndex + ']')
-            .attr('id', 'Telefones_' + telefoneIndex + '_');
-        newGroup.find('span').attr('asp-validation-for', 'Telefones[' + telefoneIndex + ']');
+
+        newGroup.find('input')
+            .val('')
+            .removeAttr('asp-for')
+            .attr('name', 'Numeros[' + telefoneIndex + ']')
+            .attr('id', 'Numeros_' + telefoneIndex);
+
+        newGroup.find('span')
+            .removeAttr('asp-validation-for') 
+            .attr('data-valmsg-for', 'Numeros[' + telefoneIndex + ']');
+
         newGroup.find('.remover-telefone').prop('disabled', false);
 
         $('#telefonesContainer').append(newGroup);
@@ -53,6 +63,7 @@
 
         revalidarFormulario();
     }
+
     function removerTelefone() {
         if ($('.telefone-group').length > 1) {
             $(this).closest('.telefone-group').remove();

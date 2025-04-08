@@ -36,10 +36,8 @@ namespace AgendaTelefonicaWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ContatoTelefoneViewModel viewModel, string Numero)
+        public async Task<IActionResult> Create(ContatoTelefoneViewModel viewModel)
         {
-            Console.WriteLine($"Dados recebidos: {JsonSerializer.Serialize(viewModel)}");
-
             if (!ModelState.IsValid)
             {
                 return View(viewModel);
@@ -47,13 +45,7 @@ namespace AgendaTelefonicaWeb.Controllers
 
             try
             {
-                var contato = new Contato
-                {
-                    Nome = viewModel.Contato.Nome,
-                    Idade = viewModel.Contato.Idade
-                };
-                await _ContatoService.InsertAsync(contato, Numero);
-
+                await _ContatoService.InsertAsync(viewModel.Contato, viewModel.Numeros);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

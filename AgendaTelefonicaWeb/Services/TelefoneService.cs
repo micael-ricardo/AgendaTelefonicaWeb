@@ -19,10 +19,11 @@ namespace AgendaTelefonicaWeb.Services
             return _context.Telefone.ToList();
         }
 
-        public async Task InsertAsync(Telefone telefone)
+        public async Task InsertAsync(List<Telefone> telefones)
         {
-            await _context.AddAsync(telefone);
+            await _context.AddRangeAsync(telefones);
             await _context.SaveChangesAsync();
         }
+
     }
 }

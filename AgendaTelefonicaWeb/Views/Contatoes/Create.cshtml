@@ -26,13 +26,13 @@
                 <label>Números de Telefone</label>
                 <div id="telefonesContainer">
                     <div class="input-group mb-2 telefone-group">
-                        <input asp-for="Numero[0]" type="text" class="form-control telefone" />
+                        <input asp-for="Numeros[0]" type="text" class="form-control telefone" />
                         <div class="input-group-append">
                             <button type="button" class="btn btn-outline-danger remover-telefone" disabled>
                                 <i class="fas fa-minus"></i>
                             </button>
                         </div>
-                        <span asp-validation-for="Numero[0]" class="text-danger"></span>
+                        <span asp-validation-for="Numeros[0]" class="text-danger"></span>
                     </div>
                 </div>
                 <button type="button" id="adicionarTelefone" class="btn btn-sm btn-outline-primary mt-2">

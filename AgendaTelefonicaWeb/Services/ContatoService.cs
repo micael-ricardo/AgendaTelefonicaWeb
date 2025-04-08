@@ -24,43 +24,39 @@ namespace AgendaTelefonicaWeb.Services
                         .ToListAsync();
         }
 
-        public async Task InsertAsync(Contato obj, string numeroTelefone)
+        public async Task InsertAsync(Contato contato, List<string> numerosTelefone)
         {
-
-            if (string.IsNullOrWhiteSpace(numeroTelefone))
+            if (numerosTelefone == null || !numerosTelefone.Any())
             {
-                throw new ArgumentException("Número de telefone é obrigatório.");
+                throw new ArgumentException("É necessário informar ao menos um número de telefone.");
             }
 
             using var transaction = await _context.Database.BeginTransactionAsync();
 
             try
             {
-                Console.WriteLine($"Aqui chegaa Numeroooo--: {numeroTelefone}");
-                await _context.AddAsync(obj);
+                await _context.AddAsync(contato);
                 await _context.SaveChangesAsync();
-                Console.WriteLine($"Contato salvo com ID: {obj.Id}");
-                int id = obj.Id;
 
-                var telefone = new Telefone
-                {
-                    Numero = numeroTelefone,
-                    ContatoId = id
-                };
+                var telefones = numerosTelefone
+                    .Where(n => !string.IsNullOrWhiteSpace(n))
+                    .Select(numero => new Telefone
+                    {
+                        Numero = numero,
+                        ContatoId = contato.Id
+                    }).ToList();
 
-                await _telefoneService.InsertAsync(telefone);
+                await _telefoneService.InsertAsync(telefones); 
 
                 await transaction.CommitAsync();
             }
-            catch (Exception ex)
+            catch
             {
-                {
-                    await transaction.RollbackAsync();
-                    Console.WriteLine($"Erro ao salvar: {ex.Message}");
-                    throw;
-                }
+                await transaction.RollbackAsync();
+                throw;
             }
         }
+
 
         public async Task<Contato> FindByIdAsync(int? id)
         {

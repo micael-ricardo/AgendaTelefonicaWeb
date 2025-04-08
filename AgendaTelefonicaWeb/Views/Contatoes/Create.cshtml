@@ -23,9 +23,21 @@
                 <span asp-validation-for="Contato.Idade" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Numero" class="control-label"></label>
-                <input asp-for="Numero" type="text" class="form-control" />
-                <span asp-validation-for="Numero" class="text-danger"></span>
+                <label>Números de Telefone</label>
+                <div id="telefonesContainer">
+                    <div class="input-group mb-2 telefone-group">
+                        <input asp-for="Numero[0]" type="text" class="form-control telefone" />
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-danger remover-telefone" disabled>
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                        <span asp-validation-for="Numero[0]" class="text-danger"></span>
+                    </div>
+                </div>
+                <button type="button" id="adicionarTelefone" class="btn btn-sm btn-outline-primary mt-2">
+                    <i class="fas fa-plus"></i> Adicionar outro telefone
+                </button>
             </div>
             <div class="form-group">
                 <input type="submit" value="Cadastro" class="btn btn-primary" />

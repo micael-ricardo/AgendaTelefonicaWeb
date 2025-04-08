@@ -104,5 +104,18 @@ namespace AgendaTelefonicaWeb.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult BaixarLog()
+        {
+            var PastaLog = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "logs", "log_exclusao.txt");
+
+            if (!System.IO.File.Exists(PastaLog))
+            {
+                TempData["Mensagem"] = "Nenhum log de exclusão foi encontrado.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var bytes = System.IO.File.ReadAllBytes(PastaLog);
+            return File(bytes, "text/plain", "log_exclusao.txt");
+        }
     }
 }

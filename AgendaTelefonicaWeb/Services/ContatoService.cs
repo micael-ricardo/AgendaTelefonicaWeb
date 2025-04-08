@@ -57,7 +57,6 @@ namespace AgendaTelefonicaWeb.Services
             }
         }
 
-
         public async Task<Contato> FindByIdAsync(int? id)
         {
             if (id == null)
@@ -68,15 +67,6 @@ namespace AgendaTelefonicaWeb.Services
                                  .Include(c => c.Telefones) 
                                  .FirstOrDefaultAsync(c => c.Id == id);
         }
-
-
-
-       /* public async Task RemoveAsync(int id) 
-        {
-            var obj = await _context.Contato.FindAsync(id);
-             _context.Contato.Remove(obj);
-             await _context.SaveChangesAsync();    
-        }*/
 
         public async Task RemoveAsync(int id)
         {

@@ -2,6 +2,7 @@
 
 using AgendaTelefonicaWeb.Data;
 using AgendaTelefonicaWeb.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgendaTelefonicaWeb.Services
 {
@@ -23,6 +24,13 @@ namespace AgendaTelefonicaWeb.Services
         {
             await _context.AddRangeAsync(telefones);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Telefone>> GetByContatoIdAsync(int contatoId)
+        {
+            return await _context.Telefone
+                               .Where(t => t.ContatoId == contatoId)
+                               .ToListAsync();
         }
 
     }

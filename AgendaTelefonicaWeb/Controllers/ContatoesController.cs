@@ -55,6 +55,9 @@ namespace AgendaTelefonicaWeb.Controllers
             }
         }
 
+
+
+
         public async Task<IActionResult> Edit(int? id)
         {
             Console.WriteLine($"Entrouuu {id}");
@@ -68,7 +71,17 @@ namespace AgendaTelefonicaWeb.Controllers
             {
                 return NotFound();
             }
-            return View(contato);
+            var telefones = await _TelefoneService.GetByContatoIdAsync(id.Value);
+
+            var viewModel = new ContatoTelefoneViewModel
+            {
+                Contato = contato,
+                Numeros = telefones.Select(t => t.Numero).ToList(),
+                TelefonesIds = telefones.Select(t => t.Id).ToList()
+            };
+
+            return View(viewModel);
+
         }
 
         public async Task<IActionResult> Delete(int? id)

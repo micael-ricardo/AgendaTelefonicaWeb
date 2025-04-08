@@ -1,8 +1,7 @@
-﻿@model AgendaTelefonicaWeb.Models.Contato
+﻿@model AgendaTelefonicaWeb.Models.ViewModels.ContatoTelefoneViewModel
 
 @{
     ViewData["Title"] = "Editar Contato";
-    var telefones = Model.Telefones.ToList(); //
 }
 
 <h1 class="text-center">@ViewData["Title"]</h1>
@@ -13,31 +12,40 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Contato.Id" />
             <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+                <label asp-for="Contato.Nome" class="control-label"></label>
+                <input asp-for="Contato.Nome" class="form-control" />
+                <span asp-validation-for="Contato.Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Idade" class="control-label"></label>
-                <input asp-for="Idade" class="form-control" />
-                <span asp-validation-for="Idade" class="text-danger"></span>
+                <label asp-for="Contato.Idade" class="control-label"></label>
+                <input asp-for="Contato.Idade" class="form-control" />
+                <span asp-validation-for="Contato.Idade" class="text-danger"></span>
             </div>
 
-            <hr />
-            <h4>Telefones</h4>
-
-            @for (int i = 0; i < telefones.Count; i++)
-            {
-                <input type="hidden" name="Telefones[@i].Id" value="@telefones[i].Id" />
-                <input type="hidden" name="Telefones[@i].ContatoId" value="@Model.Id" />
-                <div class="form-group">
-                    <label>Telefone @(@i + 1)</label>
-                    <input type="text" class="form-control telefone" name="Telefones[@i].Numero" value="Telefones[i].Numero" />
+            <div class="form-group">
+                <label>Números de Telefone</label>
+                <div id="telefonesContainer">
+                    @for (var i = 0; i < Model.Numeros.Count; i++)
+                    {
+                        <div class="input-group mb-2 telefone-group">
+                            <input asp-for="Numeros[i]" type="text" class="form-control telefone" />
+                            <input type="hidden" asp-for="TelefonesIds[i]" /> 
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-danger remover-telefone"
+                                @(Model.Numeros.Count == 1 ? "disabled" : "")>
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="Numeros[i]" class="text-danger"></span>
+                        </div>
+                    }
                 </div>
-            }
-                
+                <button type="button" id="adicionarTelefone" class="btn btn-sm btn-outline-primary mt-2">
+                    <i class="fas fa-plus"></i> Adicionar outro telefone
+                </button>
+            </div> 
             <div class="form-group">
                 <input type="submit" value="Editar" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-secondary"> Voltar </a>

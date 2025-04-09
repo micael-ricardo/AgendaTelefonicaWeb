@@ -38,18 +38,18 @@
 **Tempo gasto:** 5 Minutos
   
 ### 4- Mostre as saídas para as devidas entradas:
-principal ()
-ler m, n;
-r = 0;
-enquanto n != 0 faça
-r = r + m;
-n = n-1;
-fim do enquanto
-imprimr r;
-fim de principal
-Entrada 1: n=5 e m=3
-Entrada 1: n=0 e m=100001
-Entrada 1: n=3 e m=15
+principal ()  
+ler m, n;  
+r = 0;  
+enquanto n != 0 faça  
+r = r + m;  
+n = n-1;  
+fim do enquanto  
+imprimr r;  
+fim de principal  
+Entrada 1: n=5 e m=3  
+Entrada 1: n=0 e m=100001  
+Entrada 1: n=3 e m=15  
   
 
 

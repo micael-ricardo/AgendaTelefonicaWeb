@@ -148,7 +148,7 @@ programa {
 
 **Tempo gasto:** 15 Minutos
 
-<H1> TESTE PRÁTICO </H1>
+<H1 class="text-center"> TESTE PRÁTICO </H1>
 
 
 

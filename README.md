@@ -162,6 +162,35 @@ programa {
 ###   2. Precisamos também de um LOG, para nos mostrar quando foi excluido umcontato. Esse LOG será gravado em um arquivo texto. 3. Classifique o Teste que terminou de realizar. Comente o porquê de sua resposta.
 
 
+      
+📞 Agenda Telefônica Web
+Este projeto é uma aplicação web ASP.NET Core MVC que permite o cadastro, pesquisa, alteração e exclusão de contatos em uma agenda telefônica, com possibilidade de múltiplos telefones por contato. Um log em arquivo texto é gerado sempre que um contato é excluído.
+
+🛠️ Tecnologias Utilizadas
+ASP.NET Core MVC (.NET 9)
+
+Entity Framework Core (com Migrations)
+
+MySQL
+
+Bootstrap (via layout padrão MVC)
+
+C#
+
+🚀 Funcionalidades
+✅ Cadastro de contatos com nome, idade e múltiplos telefones
+
+✅ Pesquisa de contatos por nome e número de telefone
+
+✅ Alteração de contatos
+
+✅ Exclusão de contatos
+
+✅ Log de exclusão salvo em arquivo .txt
+
+✅ Scaffold de CRUD gerado via Entity Framework
+
+
 
 
   

@@ -115,6 +115,40 @@ programa {
 
 ### Feito e testado no : https://portugol.dev/
 
+**Tempo gasto:** 40 Minutos
+
+### 6- Escreva um algoritmo que leia seis números e os imprima em ordemcrescente.
+
+programa {  
+  funcao inicio() {  
+
+    inteiro num[6]  
+    inteiro aux  
+
+    para (inteiro i = 0; i < 6; i++) {  
+      escreva("Digite os valor " + (i + 1) + ": ")  
+      leia(num[i])  
+    
+      para(inteiro j = 0; j < 6; j++){  
+        se(num[i] < num[j]){  
+          aux = num[i]  
+          num[i] = num[j]  
+          num[j] = aux  
+        }    
+      }  
+    }   
+  
+  
+    para (inteiro i = 0; i < 6; i++){  
+      escreva(num[i] , " ")  
+    }    
+  }  
+}  
+### Feito e testado no : https://portugol.dev/
+
+**Tempo gasto:** 15 Minutos
+
+
 
 
   

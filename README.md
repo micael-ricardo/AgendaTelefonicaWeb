@@ -148,7 +148,19 @@ programa {
 
 **Tempo gasto:** 15 Minutos
 
-<H1 class="text-center"> TESTE PRÁTICO </H1>
+
+
+<H1> TESTE PRÁTICO </H1>
+
+### 1. Desenvolver uma aplicação WEB, que permita cadastrar e pesquisar contatospara uma agenda telefônica. Neste cadastro deve conter o nome da pessoa, idade, e número dos possíveis telefones que ela pode ter. Na parte de pesquisa, devepermitir pesquisar pelo nome e numero do telefone.  
+### Obs.: As estruturas das tabelas estarão discriminadas no fimdo relatório. A tela de cadastro de CONTATO será composta por:
+- a. Botão de inclusão para contato;
+- A tela de pesquisa de CONTATO será composta por:
+- b. Botão de pesquisa para os CONTATOS;
+- c. Botão de alteração para o CONTATO SELECIONADO;
+- d. Botão de exclusão para o CONTATO SELECIONADO;  
+###   2. Precisamos também de um LOG, para nos mostrar quando foi excluido umcontato. Esse LOG será gravado em um arquivo texto. 3. Classifique o Teste que terminou de realizar. Comente o porquê de sua resposta.
+
 
 
 

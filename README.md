@@ -45,14 +45,32 @@
 m = 3  
 n = 5  
 r = 0  
-Enquanto n ≠ 0 faça:  
+Enquanto n != 0 faça:  
 1ª iteração: r = 0 + 3 = 3   | n = 5 - 1 = 4  
 2ª iteração: r = 3 + 3 = 6   | n = 4 - 1 = 3  
 3ª iteração: r = 6 + 3 = 9   | n = 3 - 1 = 2  
 4ª iteração: r = 9 + 3 = 12  | n = 2 - 1 = 1  
 5ª iteração: r = 12 + 3 = 15 | n = 1 - 1 = 0  
 Fim do enquanto  
-Imprimir r → Resultado: **15**  
+Imprimir r → Resultado: **15**
+    
+- Entrada 1: n=0 e m=100001
+  Inicial: r = 0  
+  Como n = 0, o laço "enquanto" **não executa**  
+  Resultado final: **0**
+  
+- Entrada 1: n=3 e m=15  
+ m = 15  
+ n = 3  
+ r = 0  
+Enquanto n ≠ 0:  
+1ª iteração: r = 0 + 15 = 15   | n = 3 - 1 = 2   
+2ª iteração: r = 15 + 15 = 30  | n = 2 - 1 = 1  
+3ª iteração: r = 30 + 15 = 45  | n = 1 - 1 = 0  
+  
+Fim do enquanto  
+Imprimir r → Resultado: **45**  
+
 
 
   

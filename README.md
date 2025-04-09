@@ -163,9 +163,9 @@ programa {
 
 
       
-📞 Agenda Telefônica Web  
+### 📞 Agenda Telefônica Web  
    
-### Este projeto é uma aplicação web ASP.NET Core MVC que permite o cadastro, pesquisa, alteração e exclusão de contatos em uma agenda telefônica, com possibilidade de múltiplos telefones por contato. Um log em arquivo texto é gerado sempre que um contato é excluído.
+*** Este projeto é uma aplicação web ASP.NET Core MVC que permite o cadastro, pesquisa, alteração e exclusão de contatos em uma agenda telefônica, com possibilidade de múltiplos telefones por contato. Um log em arquivo texto é gerado sempre que um contato é excluído.
 
   🛠️ Tecnologias Utilizadas
   ASP.NET Core MVC (.NET 9)

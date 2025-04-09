@@ -34,15 +34,6 @@ namespace AgendaTelefonicaWeb.Services
             return await query.ToListAsync();
         }
 
-
-        /*
-        public async Task<List<Contato>> FindAllAsync()
-        {
-            return await _context.Contato
-                        .Include(c => c.Telefones)
-                        .ToListAsync();
-        }
-        */
         public async Task InsertAsync(Contato contato, List<string> numerosTelefone)
         {
             if (numerosTelefone == null || !numerosTelefone.Any())

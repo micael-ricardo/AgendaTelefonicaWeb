@@ -27,16 +27,6 @@ namespace AgendaTelefonicaWeb.Controllers
             return View(contatos);
         }
 
-
-        /* public async Task<IActionResult> Index()
-         {
-             var list = await _ContatoService.FindAllAsync();
-
-
-             return View(list);
-         }*/
-
-
         public async Task<IActionResult> Create()
         {
             return View();

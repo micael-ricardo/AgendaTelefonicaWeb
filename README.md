@@ -28,3 +28,13 @@
 ![image](https://github.com/user-attachments/assets/d359b0f8-0102-4aac-a9d2-3b31e4d6e3f9)
 
 
+- Se `a = 0`: imprimir "Não há raízes reais"
+- Senão: calcular `x = b / a` e imprimir
+  
+- Entrada 1: a=3 e b=4 = 1.33
+- Entrada 2: a=0 e b=3 = Não há raízes reais
+- Entrada 3: a=3 e b=9 = 3
+
+  
+
+

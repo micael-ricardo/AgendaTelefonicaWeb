@@ -7,12 +7,13 @@
 <h1 class="text-center">@ViewData["Title"]</h1>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <a asp-action="Create" class="btn btn-primary">Cadastrar Contato</a>
+    <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Cadastrar</a>
 
     <form asp-action="Index" method="get" class="form-inline">
+        <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" name="searchTerm" value="@ViewData["SearchTerm"]" class="form-control mr-2" placeholder="Buscar por nome ou telefone" />
-        <button type="submit" class="btn btn-outline-primary">Buscar</button>
-        <a asp-action="Index" class="btn btn-outline-secondary ml-2">Limpar</a>
+        <button type="submit" class="btn btn-outline-primary"> <i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+        <a asp-action="Index" class="btn btn-outline-secondary ml-2"> <i class="fa-solid fa-eraser"></i> Limpar</a>
     </form>
 </div>
 
@@ -57,8 +58,8 @@
                 </td>
 
             <td>
-                    <a asp-action="Edit" class="badge badge-warning" asp-route-id="@item.Id">Alterar</a> 
-                    <a asp-action="Delete" class="badge badge-danger" asp-route-id="@item.Id">Excluir</a>
+                    <a asp-action="Edit" class="badge badge-warning" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i> Editar </a>
+                    <a asp-action="Delete" class="badge badge-danger" asp-route-id="@item.Id"><i class="fa-solid fa-trash"></i> Excluir</a>
             </td>
         </tr>
 }

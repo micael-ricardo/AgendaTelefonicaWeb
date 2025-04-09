@@ -165,7 +165,7 @@ programa {
   
 Médio –  O teste propôs a construção de um CRUD, algo comum e simples em termos de estrutura, porém com requisitos que exigiram atenção a detalhes e organização do código. A parte de cadastrar múltiplos telefones para um mesmo contato, por exemplo, envolveu o uso de ViewModels e manipulação dinâmica no front-end, o que trouxe uma camada extra de complexidade.  
 
-**Tempo gasto:** 55 Horas 
+**Tempo gasto:** 40 Horas 
   
 ### 📞 Agenda Telefônica Web  
    

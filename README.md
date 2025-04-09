@@ -161,8 +161,9 @@ programa {
 - d. Botão de exclusão para o CONTATO SELECIONADO;  
 ###   2. Precisamos também de um LOG, para nos mostrar quando foi excluido umcontato. Esse LOG será gravado em um arquivo texto. 3. Classifique o Teste que terminou de realizar. Comente o porquê de sua resposta.
 
-
-      
+### 3. Classifique o Teste que terminou de realizar. Comente o porquê de sua resposta.   
+( ) Médio –  O teste propôs a construção de um CRUD, algo comum e simples em termos de estrutura, porém com requisitos que exigiram atenção a detalhes e organização do código. A parte de cadastrar múltiplos telefones para um mesmo contato, por exemplo, envolveu o uso de ViewModels e manipulação dinâmica no front-end, o que trouxe uma camada extra de complexidade.
+  
 ### 📞 Agenda Telefônica Web  
    
   Este projeto é uma aplicação web ASP.NET Core MVC que permite o cadastro, pesquisa, alteração e exclusão de contatos em uma agenda telefônica, com possibilidade de múltiplos telefones por contato. Um log em arquivo texto é gerado sempre que um contato é excluído.

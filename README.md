@@ -190,10 +190,44 @@ programa {
 ✅ Log de exclusão salvo em arquivo .txt
 
 ✅ Scaffold de CRUD gerado via Entity Framework
+  
+💻 Como rodar o projeto localmente
+1. Pré-requisitos
+.NET 9 SDK
+
+MySQL Server
+
+Um gerenciador de banco de dados MySQL (como MySQL Workbench, DBeaver, ou HeidiSQL)
 
 
+2. Configuração do Banco de Dados
+Antes de executar o projeto, crie o banco de dados e configure as permissões do usuário.
+
+Script SQL:
+CREATE DATABASE AgendaTelefonicaDB;
+
+CREATE USER 'developer'@'localhost' IDENTIFIED BY '1234567';
+GRANT ALL PRIVILEGES ON AgendaTelefonicaDB.* TO 'developer'@'localhost';
+FLUSH PRIVILEGES;
+
+3. Configurar a Connection String
+No arquivo appsettings.json, a string de conexão já está definida como:  
+"ConnectionStrings": {  
+  "AgendaTelefonicaWebContext": "Server=localhost;Port=3306;Database=AgendaTelefonicaDB;User=developer;Password=1234567;"
+}  
+  
+Ajuste caso esteja usando outro usuário/senha.  
+
+4. Rodar as Migrations  
+Abra o terminal na raiz do projeto e execute:
+
+Isso criará todas as tabelas necessárias no banco de dados.
 
 
+5. Executar a Aplicação
+Com o banco de dados configurado, basta rodar:  
+
+CTRL + F5  
   
 
 

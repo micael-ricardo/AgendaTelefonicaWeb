@@ -41,6 +41,12 @@ namespace AgendaTelefonicaWeb.Controllers
                 return View(viewModel);
             }
 
+            if (viewModel.Numeros == null || viewModel.Numeros.All(string.IsNullOrWhiteSpace))
+            {
+                ModelState.AddModelError("Numeros", "Informe ao menos um número de telefone válido.");
+                return View(viewModel);
+            }
+
             try
             {
                 await _ContatoService.InsertAsync(viewModel.Contato, viewModel.Numeros);

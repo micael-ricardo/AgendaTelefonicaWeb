@@ -73,6 +73,48 @@ Imprimir r → Resultado: **45**
   
 **Tempo gasto:** 15 Minutos
 
+### 5- Escreva um algoritmo que leia 400 números e imprima o maior, o menor e a média dos números lidos.
+
+programa {  
+  funcao inicio() {  
+    inteiro num[400]   
+    inteiro soma = 0  
+    real mediaDosValores = 0  
+    inteiro maior, menor  
+    
+    para (inteiro i = 0; i < 400; i++) {  
+      escreva("Digite o ", i+1, "º número: ")  
+      leia(num[i])  
+        
+      se (i == 0) {  
+        menor = num[i]  
+        maior = num[i]  
+      }  
+
+      senao {  
+        se (num[i] > maior) {  
+          maior = num[i]  
+        }  
+        se (num[i] < menor) {  
+          menor = num[i]  
+        }  
+      }    
+    }  
+    
+    para(inteiro i = 0; i < 400; i++) {  
+      soma += num[i]  
+    }  
+    
+    mediaDosValores = soma / 400.0     
+    
+    escreva("Menor Valor: ", menor, "\n")  
+    escreva("Maior Valor: ", maior, "\n")  
+    escreva("Média dos Valores: ", mediaDosValores)  
+  }   
+}  
+
+### Feito e testado no : https://portugol.dev/
+
 
 
   

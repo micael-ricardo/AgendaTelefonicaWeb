@@ -30,7 +30,7 @@
                     @for (var i = 0; i < Model.Numeros.Count; i++)
                     {
                         <div class="input-group mb-2 telefone-group">
-                            <input asp-for="Numeros[i]" type="text" class="form-control telefone" />
+                            <input asp-for="Numeros[i]" required="true" type="text" class="form-control telefone" />
                             <input type="hidden" asp-for="TelefonesIds[i]" /> 
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-outline-danger remover-telefone"

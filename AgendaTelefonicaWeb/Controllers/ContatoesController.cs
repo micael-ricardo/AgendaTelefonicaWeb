@@ -20,13 +20,21 @@ namespace AgendaTelefonicaWeb.Controllers
             _TelefoneService = telefoneService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            var list = await _ContatoService.FindAllAsync();
-
-
-            return View(list);
+            var contatos = await _ContatoService.FindAllAsync(searchTerm);
+            ViewData["SearchTerm"] = searchTerm;
+            return View(contatos);
         }
+
+
+        /* public async Task<IActionResult> Index()
+         {
+             var list = await _ContatoService.FindAllAsync();
+
+
+             return View(list);
+         }*/
 
 
         public async Task<IActionResult> Create()

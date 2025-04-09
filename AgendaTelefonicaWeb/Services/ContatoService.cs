@@ -17,13 +17,32 @@ namespace AgendaTelefonicaWeb.Services
             _telefoneService = telefoneService;
         }
 
+        public async Task<List<Contato>> FindAllAsync(string searchTerm = null)
+        {
+            var query = _context.Contato
+                                .Include(c => c.Telefones)
+                                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                searchTerm = searchTerm.ToLower();
+                query = query.Where(c =>
+                    c.Nome.ToLower().Contains(searchTerm) ||
+                    c.Telefones.Any(t => t.Numero.ToLower().Contains(searchTerm)));
+            }
+
+            return await query.ToListAsync();
+        }
+
+
+        /*
         public async Task<List<Contato>> FindAllAsync()
         {
             return await _context.Contato
                         .Include(c => c.Telefones)
                         .ToListAsync();
         }
-
+        */
         public async Task InsertAsync(Contato contato, List<string> numerosTelefone)
         {
             if (numerosTelefone == null || !numerosTelefone.Any())

@@ -38,18 +38,23 @@
 **Tempo gasto:** 5 Minutos
   
 ### 4- Mostre as saídas para as devidas entradas:
-principal ()  
-ler m, n;  
-r = 0;  
-enquanto n != 0 faça  
-r = r + m;  
-n = n-1;  
-fim do enquanto  
-imprimr r;  
-fim de principal  
-Entrada 1: n=5 e m=3  
-Entrada 1: n=0 e m=100001  
-Entrada 1: n=3 e m=15  
+
+![image](https://github.com/user-attachments/assets/6c86a8af-ba27-4463-a829-fc3ca269d293)
+
+- Entrada 1: n=5 e m=3 =
+m = 3  
+n = 5  
+r = 0  
+Enquanto n ≠ 0 faça:  
+1ª iteração: r = 0 + 3 = 3   | n = 5 - 1 = 4  
+2ª iteração: r = 3 + 3 = 6   | n = 4 - 1 = 3  
+3ª iteração: r = 6 + 3 = 9   | n = 3 - 1 = 2  
+4ª iteração: r = 9 + 3 = 12  | n = 2 - 1 = 1  
+5ª iteração: r = 12 + 3 = 15 | n = 1 - 1 = 0  
+Fim do enquanto  
+Imprimir r → Resultado: **15**  
+
+
   
 
 

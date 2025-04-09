@@ -70,6 +70,8 @@ Enquanto n ≠ 0:
   
 Fim do enquanto  
 Imprimir r → Resultado: **45**  
+  
+**Tempo gasto:** 15 Minutos
 
 
 

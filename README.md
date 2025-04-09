@@ -225,13 +225,13 @@ Ajuste caso esteja usando outro usuário/senha.
 4. Rodar as Migrations  
 Abra o terminal na raiz do projeto e execute:
 
-Add-migration teste
+Add-migration teste  
 update-Database
 
 Isso criará todas as tabelas necessárias no banco de dados.
 
 
-5. Executar a Aplicação
+5. Executar a Aplicação  
 Com o banco de dados configurado, basta rodar:  
 
 CTRL + F5  
